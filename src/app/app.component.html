@@ -1,3 +1,8 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <div class="row"> 
+    <pd-header (notifyHome)="toggleStatsDash($event)"></pd-header>
+  </div>
+  <div class="row">
+    <pd-home (notifyHeader)="toggleStatsBtn($event)"></pd-home>
+  </div>
+</div>

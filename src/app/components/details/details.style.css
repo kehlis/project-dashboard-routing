@@ -1,0 +1,31 @@
+.fa {
+    cursor: pointer;
+    float: right;
+}
+
+.fa-file-pdf-o {
+    margin-right: 5px;
+}
+
+.fa-external-link-square {
+    margin-top: 2px;
+}
+
+a#moreDetails {
+    float: right;
+    bottom: -15px;
+    margin-top: 10px;    
+}
+
+#formSavedAlert {
+    color: red;
+    font-weight: bold;
+}
+
+.detailInfo {
+    font-size: 22px;
+}
+
+label {
+    color: #337ab7;
+}

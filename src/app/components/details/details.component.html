@@ -1,0 +1,258 @@
+<!--<form *ngIf="editForm" (ngSubmit)="updateProject(projForm)" #projForm="ngForm">
+    <div class="user-data">
+          
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <i class="fa fa-file-excel-o fa-2x" title="Export to Excel" onclick="alert('Exporting...')" aria-hidden="true"> </i>
+            <i class="fa fa-file-pdf-o fa-2x" title="Export to PDF" onclick="alert('Exporting...')" aria-hidden="true"> </i>  
+            <div *ngIf="!editForm" from="title">
+                {{ projDetails.title }}
+            </div>               
+            
+            <input *ngIf="editForm" type="text"
+                id="title"
+                class="form-control"
+                
+                name="title"
+                [(ngModel)]="newProjDetails.title">
+                            
+        </div>
+        <div class="form-group">    
+            <label for="division">Division</label>
+            <div *ngIf="!editForm" from="title">
+                {{ projDetails.division }}
+            </div>
+            
+            <select *ngIf="editForm && options.division.length > 0" 
+                id="division"
+                class="form-control"
+                [(ngModel)]="projDetails.division" 
+                name="division">
+                <option *ngFor="let option of options.division"
+                    value="{{ option.value }}">
+                    {{ option.option }}
+                </option>
+            </select>                        
+        </div>
+        <div class="form-group">    
+            <label for="projOwner">Product Owner</label>
+            <div *ngIf="!editForm">
+                {{ projDetails.project_owner }}
+            </div>
+            
+            <select *ngIf="editForm && options.project_owner.length > 0" 
+                id="projOwner"
+                class="form-control"
+                [(ngModel)]="projDetails.project_owner" 
+                name="projuct_owner">
+                <option *ngFor="let option of options.project_owner"
+                    value="{{ option.value }}">
+                    {{ option.option }}
+                </option>
+            </select>                        
+        </div>
+        <div class="form-group">
+            <label for="budget">Budget</label>
+            <div *ngIf="!editForm">
+                ${{ projDetails.budget }}
+            </div>
+           
+            <input *ngIf="editForm" type="number"
+                id="budget"
+                class="form-control"
+                ngModel 
+                [(ngModel)]="projDetails.budget"
+                name="budget">
+                
+        </div>
+        <div class="form-group">    
+            <label for="status">Status</label>
+            <div *ngIf="!editForm">
+                {{ projDetails.status }}
+            </div>
+            
+            <select *ngIf="editForm && options.status.length > 0" 
+                id="status"
+                class="form-control"
+                [(ngModel)]="newProjDetails.status" 
+                name="status">
+                <option *ngFor="let option of options.status"
+                    value="{{ option.value }}">
+                    {{ option.option }}
+                </option>
+            </select>                        
+        </div>
+        <div class="form-group">
+            <label for="createDate">Created Date:</label><br/>
+            <div>
+                {{ projDetails.created }}
+            </div>            
+        </div>    
+        <div *ngIf="projDetails.modified !== null" class="form-group">
+            <label for="modifyDate">Modified Date:</label><br/>
+            <div>
+                {{ projDetails.modified }}
+            </div>            
+        </div> 
+        <div class="form-group">
+            <button type="submit" [disabled]="projForm.pristine" class="btn btn-primary">Save</button>  
+            <button type="button" *ngIf="!editForm" (click)="setNewDetails();editForm=!editForm" class="btn btn-primary">Edit</button>  
+            <button type="button" *ngIf="editForm" (click)="resetEdit();editForm=!editForm" class="btn btn-primary">Cancel</button>          
+            <a id="moreDetails" href="#">More Details on {{ projDetails.title }}</a>
+        </div>  
+        <div *ngIf="formSaved">
+            Form Saved!
+        </div>                 
+    </div>
+</form>-->
+
+<form *ngIf="!editForm" (ngSubmit)="updateProject(projForm)" #projForm="ngForm">
+    <div class="user-data">         
+        <pd-export></pd-export>
+        <div class="form-group">
+            <label for="title">Title</label>
+                        <div class="detailInfo" from="title">
+                {{ project.title }}
+            </div>               
+                                    
+        </div>
+        <div class="form-group">    
+            <label for="division">Division</label>
+            <div class="detailInfo" from="division">
+                {{ project.division }}
+            </div>
+                                   
+        </div>
+        <div class="form-group">    
+            <label for="projOwner">Product Owner</label>
+            <div class="detailInfo">
+                {{ project.project_owner }}
+            </div>
+                                  
+        </div>
+        <div class="form-group">
+            <label for="budget">Budget</label>
+            <div class="detailInfo">
+                {{ project.budget | currency: 'USD':true:'1.2-2' }}
+            </div>
+                           
+        </div>
+        <div class="form-group">    
+            <label for="status">Status</label>
+            <div class="detailInfo">
+                {{ project.status | capitalize }}
+            </div>
+                                   
+        </div>
+        <div class="form-group">
+            <div class="fltLt mgRt15">
+                <label for="createDate">Created Date:</label><br/>
+                <div class="detailInfo">
+                    {{ project.created }}
+                </div>    
+            </div>        
+            <div *ngIf="project.modified !== null" class="fltLt mgLt15">
+                <label for="modifyDate">Modified Date:</label><br/>
+                <div class="detailInfo">
+                    {{ project.modified }}
+                </div>            
+            </div>
+        </div>    
+        <div style="clear:both;"></div>
+        <div class="form-group mgTp15">
+            <button type="submit" [disabled]="projForm.pristine" class="btn btn-primary">Save</button>  
+            <button type="button"  (click)="setEditDetails(); editForm=!editForm" class="btn btn-primary">Edit</button>            
+            
+        </div>  
+                         
+    </div>
+</form>
+
+<form *ngIf="editForm" (ngSubmit)="updateProject(projForm)" #projForm="ngForm">
+    <div class="user-data">
+          
+
+        <div class="form-group">
+            <label for="title">Title</label>          
+            
+            <input *ngIf="editForm" type="text"
+                id="title"
+                class="form-control"                
+                name="title"
+                [ngModel]="editProjDetails.title">
+                            
+        </div>
+        <div class="form-group">    
+            <label for="division">Division</label>            
+            
+            <select *ngIf="options.division.length > 0" 
+                id="division"
+                class="form-control"
+                [ngModel]="editProjDetails.division" 
+                name="division">
+                <option *ngFor="let option of options.division"
+                    value="{{ option.value }}">
+                    {{ option.option }}
+                </option>
+            </select>                        
+        </div>
+        <div class="form-group">    
+            <label for="projOwner">Product Owner</label>            
+            
+            <select *ngIf="options.project_owner.length > 0" 
+                id="projOwner"
+                class="form-control"
+                [ngModel]="editProjDetails.project_owner" 
+                name="project_owner">
+                <option *ngFor="let option of options.project_owner"
+                    value="{{ option.value }}">
+                    {{ option.option }}
+                </option>
+            </select>                        
+        </div>
+        <div class="form-group">
+            <label for="budget">Budget</label>
+            
+           
+            <input *ngIf="editForm" type="number"
+                id="budget"
+                class="form-control"
+                ngModel 
+                [ngModel]="editProjDetails.budget"
+                name="budget">
+                
+        </div>
+        <div class="form-group">    
+            <label for="status">Status</label>
+                        
+            <select *ngIf="options.status.length > 0" 
+                id="status"
+                class="form-control"
+                [ngModel]="editProjDetails.status" 
+                name="status">
+                <option *ngFor="let option of options.status"
+                    value="{{ option.value }}">
+                    {{ option.option }}
+                </option>
+            </select>                        
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" [disabled]="projForm.pristine" class="btn btn-primary">Save</button>                
+            <button type="button" (click)="editForm=!editForm" class="btn btn-primary">Cancel</button>          
+            
+        </div>  
+                         
+    </div>
+</form>
+
+<!--ROUTING...-->
+<a id="moreDetails" onclick="alert('Going to more details...')" href="#">
+    More Details on {{ project.title }} 
+    <i class="fa fa-external-link-square" aria-hidden="true"></i>
+</a>
+
+<div *ngIf="formSaved" id="formSavedAlert">
+    Form Saved!
+</div>

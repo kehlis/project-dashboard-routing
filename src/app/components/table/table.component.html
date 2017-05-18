@@ -1,0 +1,19 @@
+<table class="table table-striped table-hover table-bordered table-striped">
+    <thead *ngIf="headers">
+        <tr>
+            <td *ngFor="let head of headers">
+                {{ head }}
+            </td>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let project of values" (click)="getDetails(project)" [style.cursor]="isResultsTable ? 'pointer': 'normal'">
+            <td *ngFor="let key of keys">
+                {{ project[key] }}
+            </td>
+        </tr>
+
+    </tbody>
+</table>

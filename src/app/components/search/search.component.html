@@ -1,0 +1,58 @@
+<form (ngSubmit)="onSearch(searchForm)" #searchForm="ngForm">
+    <div class="user-data">
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" class="form-control" ngModel name="title">
+        </div>
+
+        <div class="form-group">
+            <div id="createDate" class="fltLt mgRt10">
+                <label for="created">Created Date Range</label><br/>
+                <my-date-range-picker id="createdRange" name="createdRange" [options]="myDateRangePickerOptions" [(ngModel)]="modelCreate">
+                </my-date-range-picker>
+            </div>
+            <div id="modifiedDate" class="fltLt">
+                <label for="modified">Modified Date Range</label><br/>
+                <my-date-range-picker id="modifiedRange" name="modifiedRange" [options]="myDateRangePickerOptions" [(ngModel)]="modelModified">
+                </my-date-range-picker>
+            </div>
+
+        </div>
+        <div style="clear:both;"></div>
+        <div class="form-group">
+            <label for="division">Division</label>
+            <select *ngIf="options.division.length > 0" id="division" class="form-control" [ngModel]="defaultDropdownVal" name="division">
+                <option *ngFor="let option of options.division"
+                    value="{{ option.value }}">
+                    {{ option.option }}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="projOwner">Project Owner</label>
+            <select *ngIf="options.project_owner.length > 0" id="projOwner" class="form-control" [ngModel]="defaultDropdownVal" name="project_owner">
+                <option *ngFor="let option of options.project_owner"
+                    value="{{ option.value }}">
+                    {{ option.option }}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select *ngIf="options.status.length > 0" id="status" class="form-control" [ngModel]="defaultDropdownVal" name="status">
+                <option *ngFor="let option of options.status"
+                    value="{{ option.value }}">
+                    {{ option.option }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="budget">Max Budget</label>
+            <input type="number" id="budget" class="form-control" ngModel name="budget">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>

@@ -1,0 +1,12 @@
+h1, h2, h3 {
+    margin-top: 0px;
+    color: #337ab7;
+}
+
+#statH1 span {
+    font-size: 40px;
+}
+
+#statH2 span {
+    font-size: 26px;
+}

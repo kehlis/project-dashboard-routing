@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+
+.box-shadow {
+    -webkit-box-shadow: 5px 5px 25px 0px rgba(0,0,0,1);
+    -moz-box-shadow: 5px 5px 25px 0px rgba(0,0,0,1);
+    box-shadow: 5px 5px 25px 0px rgba(0,0,0,1);
+}
+
+.head-box {
+    background-color: #337ab7;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+#btnStats {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 35px;
+}
+
+#btnAddProject {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.fltLt {
+    float: left;
+}
+
+.mgRt10 {
+    margin-right: 10px;
+}
+
+.mgRt15 {
+    margin-right: 15px;
+}
+
+.mgLt15 {
+    margin-left: 15px;
+}
+
+.mgTp15 {
+    margin-top: 15px;
+}
+
+.mgBt15 {
+    margin-bottom: 15px;
+}
+
+.negMgBtn10 {
+    margin-bottom: -10px;
+}

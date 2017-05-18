@@ -1,0 +1,18 @@
+label {
+    color: #337ab7;
+}
+
+#noResultsFound {
+    margin-top:30px;
+    color: #337ab7;
+    font-size: 72px;
+}
+
+#createDate {
+    /*width: 172px;*/
+    width: 48%;
+}
+
+#modifiedDate {
+    width: 49%;
+}
