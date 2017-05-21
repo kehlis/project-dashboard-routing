@@ -13,12 +13,4 @@ export class AppComponent {
 
   title = 'Project Dashboard';
 
-  toggleStatsBtn(event: boolean) {
-    this.headerComponent.showStats = !event;
-
-  }
-
-  toggleStatsDash(event: boolean) {
-    this.homeComponent.toggleStatsDash(event);
-  }
 }

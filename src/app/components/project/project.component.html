@@ -1,0 +1,32 @@
+<div *ngIf="project !== undefined" id="projectSpotlight">
+    <div class="row mgBt15">
+        <div class="col-md-12 text-center">
+            <h1>{{ project.title }}</h1>
+            <h3>{{ project.project_owner }}</h3>
+        </div>        
+    </div>
+    <div class="row mgTp15">
+        <div class="col-md-3 col-md-offset-2">
+            <div class="col-md-12">
+                <label>Budget</label><br/>
+                <h2>{{ project.budget | currency: 'USD':true:'1.2-2' }}</h2>
+            </div>
+            <div class="col-md-12">
+                <label>Status</label><br/>
+                <h2>{{ project.status | capitalize }}</h2>
+            </div>
+            <div class="col-md-12">
+                <label>Division</label><br/>
+                <h2>{{ project.division }}</h2>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <img src='/src/app/shared/images/fake-graph.png' title="Fake Graph">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a routerLink="">Back to Project Search</a>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,25 @@
-
-
 .pointer {
     cursor: pointer;
+}
+
+.searchResults thead {
+    display: block;
+    color: #337ab7;
+    font-weight: bold;
+}
+
+.searchResults tbody {
+    display: block;
+    height: 420px;
+    overflow-y: scroll;
+}
+
+.searchResults thead tr, .searchResults tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+.searchResults thead tr td:first-child, .searchResults tbody tr td:first-child {
+    width:120px;
 }

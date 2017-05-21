@@ -1,15 +1,14 @@
 import { Component, ViewChild, ElementRef, EventEmitter, Output, OnInit } from '@angular/core';
-
 import { SearchComponent } from '../../components/search/search.component';
 import { TableComponent } from '../../components/table/table.component';
 import { StatsComponent } from '../../components/stats/stats.component';
 import { DetailsComponent } from '../../components/details/details.component';
-
 import { IMyOptions } from 'mydaterangepicker';
-
-import { IProject } from '../../models/project.model';
-
+import { IProject } from '../../shared/models/Iproject';
+import { ISearchQs } from '../../shared/models/IsearchQs';
 import { ProjectsService } from '../../services/projects.service';
+import { StatsService } from '../../services/stats.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'pd-home',
@@ -19,11 +18,11 @@ import { ProjectsService } from '../../services/projects.service';
 })
 export class HomeComponent implements OnInit {
     @ViewChild('resultsTable') resultsTable: TableComponent;
-    @Output() notifyHeader: EventEmitter<boolean> = new EventEmitter();
 
     allProjects: IProject[];
     tableValues: Array<any> = [];
     projDetails: IProject;
+    queryString: ISearchQs;
 
     options: Object;
 
@@ -32,7 +31,9 @@ export class HomeComponent implements OnInit {
     showStatsDash = true;
     showZeroResults = false;
 
-    constructor(private projectService: ProjectsService) {
+    constructor(private projectService: ProjectsService,
+        private statsService: StatsService,
+        private activatedRoute: ActivatedRoute) {
 
     }
 
@@ -41,9 +42,22 @@ export class HomeComponent implements OnInit {
             allProjects => {
                 this.allProjects = allProjects;
                 this.options = this.projectService.getDropdownOptions(this.allProjects);
-                console.log(this.allProjects);
             }
         );
+
+        this.statsService.showStatsDash$.subscribe(statsShown => {
+            this.showStatsDash = statsShown;
+            if (this.showStatsDash) {
+                this.toggleStatsDash(this.showStatsDash);
+            }
+        });
+
+        if (this.activatedRoute.queryParams) {
+            this.activatedRoute.queryParams.subscribe((params: ISearchQs) => {
+                this.queryString = params;
+                console.log(this.queryString);
+            });
+        }
     }
 
     handleResults(projs: IProject[]) {
@@ -59,7 +73,6 @@ export class HomeComponent implements OnInit {
         } else {
             this.showZeroResults = true;
         }
-
     }
 
     handleProjSelect(proj: IProject) {
@@ -81,11 +94,16 @@ export class HomeComponent implements OnInit {
         return results;
     }
 
-    toggleStatsDash(event: boolean) {
-        this.hideAll();
-        this.showStatsDash = event;
-
-        this.notifyHeader.emit(!this.showStatsDash);
+    toggleStatsDash(showHide: boolean) {
+        if (!showHide) {
+            this.showStatsDash = false;
+            this.statsService.toggleStatsDash(this.showStatsDash);
+        } else {
+            this.showResultsTable = false;
+            this.showProjDetails = false;
+            this.showZeroResults = false;
+            this.showStatsDash = true;
+        }
 
     }
 
@@ -95,4 +113,5 @@ export class HomeComponent implements OnInit {
         this.showZeroResults = false;
         this.showStatsDash = false;
     }
+
 }

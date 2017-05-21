@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { IProject, Project } from '../models/project.model';
-import { ISearch } from '../models/search.model';
+import { IProject } from '../shared/models/Iproject';
+import { ISearch } from '../shared/models/Isearch';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -43,8 +43,6 @@ export class ProjectsService {
 
     public updateProject(projToUpdate: IProject) {
         // this.http...
-        // let project = new Project(projToUpdate);
-
         console.log('Project updated...');
         console.log(projToUpdate);
     }

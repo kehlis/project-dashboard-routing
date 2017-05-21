@@ -1,12 +1,14 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { IProject, Project } from '../models/project.model';
-
+import { IProject } from '../shared/models/Iproject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class StatsService {
-
+  showStatsDash = new Subject<boolean>();
+  showStatsDash$ = this.showStatsDash.asObservable();
 
   constructor() { }
 
@@ -33,6 +35,10 @@ export class StatsService {
 
     return result;
 
+  }
+
+  toggleStatsDash(showStats: boolean) {
+    this.showStatsDash.next(showStats);
   }
 
 }

@@ -9,33 +9,37 @@ import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { TableComponent } from './components/table/table.component';
 import { DetailsComponent } from './components/details/details.component';
-import { DropdownComponent } from './components/dropdown/dropdown.compontent';
 import { StatsComponent } from './components/stats/stats.component';
 import { ExportComponent } from './components/utils/export/export.component';
+import { ProjectComponent } from './components/project/project.component';
+
+import { StatsService } from './services/stats.service';
 
 import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { CapitalizePipe } from './capitalize.pipe';
+import { routing } from './app.routing';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SearchComponent,
-    DropdownComponent,
     TableComponent,
     DetailsComponent,
     StatsComponent,
     ExportComponent,
     HomeComponent,
-    CapitalizePipe
+    CapitalizePipe,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    MyDateRangePickerModule
+    MyDateRangePickerModule,
+    routing
   ],
-  providers: [],
+  providers: [StatsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

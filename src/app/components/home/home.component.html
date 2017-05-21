@@ -4,20 +4,21 @@
     </div>
     <ng-template #getStarted>
         <div class="col-md-4">
-            <pd-search (sendToTable)="handleResults($event)" 
+            <pd-search (notifyTable)="handleResults($event)" 
                 [projects]="allProjects"
-                [dropdowns]="options"></pd-search>
+                [dropdowns]="options"
+                [urlParams]="queryString"></pd-search>
         </div>
         <div *ngIf="showResultsTable" class="col-md-4">
             <pd-table id="searchResults" #resultsTable [headers]="['Title', 'Owner']" [keys]="['title', 'project_owner']" 
-                (sendToDetails)="handleProjSelect($event)"
+                (notifyDetails)="handleProjSelect($event)"
                 [values]="tableValues"></pd-table>
         </div>
         <div *ngIf="showProjDetails" class="col-md-4">
             <pd-details [projects]="allProjects" [project]="projDetails"></pd-details>
         </div>
         <div *ngIf="showStatsDash" class="col-md-8">
-            <pd-stats [projects]="allProjects"></pd-stats>
+            <pd-stats></pd-stats>
         </div>
         <div *ngIf="showZeroResults" class="col-md-8">
             <div id="noResultsFound" class="text-center">

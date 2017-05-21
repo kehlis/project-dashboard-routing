@@ -1,9 +1,16 @@
-<div id="statH1" class="row text-center">
+<div *ngIf="!projsLoaded" class="row">
+    <div class="col-md-12 text-center">
+        <div id="loadingStats" class="text-center">
+            Stats<br/> Loading...
+        </div>
+    </div>
+</div>
+<div *ngIf="projsLoaded" id="statH1" class="row text-center">
     <div class="col-md-12">
         <h1 class="negMgBtn10">Total Projects:</h1><br/>
         <span>{{ totalProjects }}</span>
-        
-    </div>    
+
+    </div>
 </div>
 <div id="statH2" class="row text-center mgBt15">
     <div class="col-md-6">
@@ -18,20 +25,17 @@
 <div class="row mgTp15">
     <div class="col-md-4">
         <h3>By Owner</h3>
-        <pd-table [statsTable]="true" [keys]="['option', 'count']" 
-            [values]="projOwners"></pd-table>
-        
+        <pd-table [statsTable]="true" [keys]="['option', 'count']" [values]="projOwners"></pd-table>
+
     </div>
     <div class="col-md-4">
         <h3>By Status</h3>
-        <pd-table [statsTable]="true" [keys]="['option', 'count']" 
-            [values]="projStatus"></pd-table>
-        
+        <pd-table [statsTable]="true" [keys]="['option', 'count']" [values]="projStatus"></pd-table>
+
     </div>
     <div class="col-md-4 mgBt15">
         <h3>By Division</h3>
-        <pd-table [statsTable]="true" [keys]="['option', 'count']"
-            [values]="projDivision"></pd-table>
+        <pd-table [statsTable]="true" [keys]="['option', 'count']" [values]="projDivision"></pd-table>
     </div>
     <pd-export></pd-export>
 </div>

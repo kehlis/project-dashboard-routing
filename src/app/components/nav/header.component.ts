@@ -1,18 +1,29 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { StatsService } from '../../services/stats.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'pd-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.style.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
     @Output() notifyHome: EventEmitter<boolean> = new EventEmitter();
-    showStats = true;
+    showStatsDash = true;
 
     title = 'Project Dashboard';
 
+    constructor(private statsService: StatsService,
+        private router: Router) {}
 
-    toggleStats(event: boolean) {
-        this.notifyHome.emit(event);
+    ngOnInit() {
+        this.statsService.showStatsDash$.subscribe(data => {
+            this.showStatsDash = data;
+        });
+    }
+
+    toggleStats() {
+        this.showStatsDash = true;
+        this.statsService.toggleStatsDash(this.showStatsDash);
     }
 }

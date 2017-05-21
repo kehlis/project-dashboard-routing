@@ -1,0 +1,17 @@
+#projectSpotlight h1 {
+    font-size: 50px;
+    color: #337ab7;
+}
+
+#projectSpotlight h3 {
+    font-size: 20px;    
+}
+
+#projectSpotlight label {
+    color: #337ab7;
+}
+
+#projectSpotlight h2 {
+    margin-top: 5px;
+    margin-bottom: 30px;
+}

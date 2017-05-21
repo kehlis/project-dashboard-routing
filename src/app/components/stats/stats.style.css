@@ -10,3 +10,9 @@ h1, h2, h3 {
 #statH2 span {
     font-size: 26px;
 }
+
+#loadingStats {
+    margin-top:30px;
+    color: #337ab7;
+    font-size: 72px;
+}

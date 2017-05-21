@@ -1,11 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
 import { TableComponent } from '../../components/table/table.component';
 import { ExportComponent } from '../../components/utils/export/export.component';
-
-import { IProject, Project } from '../../models/project.model';
-
+import { IProject } from '../../shared/models/Iproject';
 import { ProjectsService } from '../../services/projects.service';
 import { StatsService } from '../../services/stats.service';
 
@@ -16,7 +13,8 @@ import { StatsService } from '../../services/stats.service';
     providers: [ProjectsService, StatsService]
 })
 export class StatsComponent implements OnInit {
-    @Input() projects: IProject[];
+    allProjects: IProject[];
+    projsLoaded = false;
     totalProjects: number;
     budgetSum: number;
     avgBudget: number;
@@ -29,13 +27,19 @@ export class StatsComponent implements OnInit {
         private statsService: StatsService) { }
 
     ngOnInit() {
-        this.displayStats(this.projects);
+        this.projectsService.getAllProjects().subscribe(
+            allProjs => {
+                this.allProjects = allProjs;
+                this.displayStats(this.allProjects);
+                this.projsLoaded = true;
+            }
+        );
     }
 
     displayStats(projects: IProject[]) {
         const budget = [];
 
-        this.projects.forEach(proj => {
+        projects.forEach(proj => {
             if (proj.budget !== undefined) {
                 budget.push(proj.budget);
             }
@@ -44,12 +48,7 @@ export class StatsComponent implements OnInit {
         this.totalProjects = projects.length;
         this.budgetSum = this.statsService.getSum(budget);
 
-        // let sum = this.budgetSum;
-        // this.budgetSum = this.projectsService.addComma(this.budgetSum);
-
-        // let avg = (this.budgetSum / budget.length);//.toFixed(2);
         this.avgBudget = (this.budgetSum / budget.length);
-        // this.projectsService.addComma(avg);
 
         this.options = this.projectsService.getDropdownOptions(projects, false);
 

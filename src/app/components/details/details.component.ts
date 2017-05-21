@@ -1,6 +1,6 @@
 import { Component, Input, ElementRef, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { IProject } from '../../models/project.model';
+import { IProject } from '../../shared/models/Iproject';
 import { ProjectsService } from '../../services/projects.service';
 import { ExportComponent } from '../../components/utils/export/export.component';
 
@@ -50,7 +50,7 @@ export class DetailsComponent implements OnInit {
         this.projectsService.updateProject(updatedProject);
 
     }
-    
+
     createModifiedDate() {
         const date = new Date();
         return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
